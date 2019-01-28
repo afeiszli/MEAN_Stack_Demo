@@ -24,20 +24,12 @@ mongoose.connection.on('error', function(err){
 	}
 });
 
-
-
-//View Engine
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'ejs');
-//app.engine('html', require('ejs').renderFile);
-
 app.use(express.static(path.join(__dirname, 'views')));
 
 //middleware
 app.use(cors());
 
 app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({extended: false}));
 
 //routes
 app.use('/', index);
