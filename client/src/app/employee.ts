@@ -5,5 +5,13 @@ export class Employee{
         address: string;
         company: string;
         salary: number;
+	
+	constructor(
+        	first_name: string,
+        	last_name: string,
+        	address: string,
+        	company: string,
+        	salary: number
+	) { }
 }
 

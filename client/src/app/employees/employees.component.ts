@@ -21,6 +21,8 @@ export class EmployeesComponent implements OnInit {
   company:string;
   salary:number;
 
+  model = new Employee('Joe', 'Schmoe', '123 Main St.', 'Omnicom', 40000);
+
   constructor(private http: HttpClient, private employeeService: EmployeeService) { }
 
   addEmployee(){
@@ -32,21 +34,15 @@ export class EmployeesComponent implements OnInit {
       salary:this.salary	
     }
  
-  this.employeeService.addEmployee(newEmployee).subscribe((res)=>{
-    this.employees.push(res);
-//    console.log("Created an employee");
-  });
- 
+    this.employeeService.addEmployee(newEmployee).subscribe((res)=>{
+//      this.employees.push(res);
+    	  console.log(res);
+    }); 
   }
   
   ngOnInit() {
-//    this.http.get('http://localhost:3000/api/employees')
-//      .subscribe(data => console.log(data));
-//      .subscribe( data => this.employees = data );
     this.employeeService.getEmployees()
       .subscribe( employees =>
       this.employees = employees );
- 
   }
-
 }

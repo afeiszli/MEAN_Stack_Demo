@@ -14,8 +14,7 @@ export class CompanyService {
   getCompanies(){
     return this.http.get<String[]>('http://localhost:3000/api/companies');
   }
-  getSalaries(){
-
+  getSalaries(company){
+    return this.http.get('http://localhost:3000/api/costs/{{company}}');
   }
 }
-

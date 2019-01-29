@@ -11,9 +11,10 @@ import { Company } from '../company';
 export class CompaniesComponent implements OnInit {
 //  companies: Company[];
   companies: String[];
-  company: Company;
-               
-  name: string;
+//  company: Company;
+  comapny: string;               
+  salary_sum: number;
+//  name: string;
 
   constructor(private companyService: CompanyService) { }
 
