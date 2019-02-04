@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Employee } from '../employee';
 import { HttpClient } from '@angular/common/http'
 import { EmployeeService } from '../employee.service';
@@ -10,9 +10,9 @@ import { EmployeeService } from '../employee.service';
 })
 export class EmployeesComponent implements OnInit {
 
-  //employees: Employee[];
-  //employees: Object;
-  employees: Array<Employee>;
+  @Output() employeeAddedEvent = new EventEmitter<Event>();
+
+  employees: Employee[];
   employee: Employee;
 
   first_name:string;
@@ -21,12 +21,16 @@ export class EmployeesComponent implements OnInit {
   company:string;
   salary:number;
 
-  model = new Employee('Joe', 'Schmoe', '123 Main St.', 'Omnicom', 40000);
-
   constructor(private http: HttpClient, private employeeService: EmployeeService) { }
 
-  addEmployee(){
-    const newEmployee ={
+  addEmployee(value: any){
+    this.first_name=value.first_name;
+    this.last_name=value.last_name;
+    this.address=value.address;
+    this.company=value.company;
+    this.salary=value.salary;
+
+    var newEmployee ={
       first_name:this.first_name,
       last_name:this.last_name,
       address:this.address,
@@ -35,14 +39,15 @@ export class EmployeesComponent implements OnInit {
     }
  
     this.employeeService.addEmployee(newEmployee).subscribe((res)=>{
-//      this.employees.push(res);
-    	  console.log(res);
-    }); 
+      this.employees.push(res);
+      console.log(res);
+      this.employeeAddedEvent.emit(event);
+    });
   }
   
   ngOnInit() {
     this.employeeService.getEmployees()
-      .subscribe( employees =>
-      this.employees = employees );
+      .subscribe( data =>
+      this.employees = data );
   }
 }

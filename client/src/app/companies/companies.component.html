@@ -1,12 +1,17 @@
-<div class = "container">
 <div class="row">
 <div class= "col-md-12">
 <h1>Get Company Costs</h1>
-<strong>Company: </strong> <select ng-model="selectedCompany">
-<option *ngFor="let company of companies" value="{{company}}">{{company}}</option>
-</select>
-<br>
-<strong>Salary costs for {{company}} are $SALARY_SUM per year.</strong>
-</div>
+	<form #form="ngForm">
+		<h2>
+		<strong>Company: </strong>
+		<select [(ngModel)]="company" name="company" (change)="getSalary()">
+			<option *ngFor="let company of companies" name="company" value="{{company}}">{{company}}</option>
+		</select>
+		</h2>
+                <button type = "submit" (click)="updateCompanies()">Submit</button>
+
+	</form>
+<h3><strong>{{company}} </strong> spends ${{salary_sum}} on salaries per year</h3>
+
 </div>
 </div>

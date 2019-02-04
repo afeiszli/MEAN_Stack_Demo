@@ -11,13 +11,13 @@ export class EmployeeService {
   constructor(private http: HttpClient) { }
 
   //get employees
-  getEmployees(){
+  getEmployees() {
     return this.http.get<Employee[]>('http://localhost:3000/api/employees');
   }
 
   //add employee
   addEmployee(employee){
-    return this.http.post('http://localhost:3000/api/employee', employee);
+    return this.http.post<Employee>('http://localhost:3000/api/employee', employee);
   }
 
 }

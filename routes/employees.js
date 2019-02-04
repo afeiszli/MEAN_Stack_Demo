@@ -29,7 +29,7 @@ router.post('/employee', function(req, res, next){
 		if(err){
 			res.json({msg: 'Failed to add employee: ' + err});
 		} else{
-			res.json({msg: 'Employee added successfully'});
+			res.json(employee);
 		}
 	});
 });
@@ -49,7 +49,7 @@ router.get('/companies', function(req, res, next){
 router.get('/costs/:company', function(req, res, next){
 	Employee.aggregate([{
 		$match : { company: req.params.company}},{
-		$group : { _id : null, total: { $sum : "$salary" }}}], function(err, result){
+		$group : { _id: req.params.company, salary_sum: { $sum : "$salary" }}}], function(err, result){
                 if(err){
                         res.send(err);
                 } else {

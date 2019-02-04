@@ -16,7 +16,7 @@ const mongo_addr = process.env.MONGO_ADDR || 'localhost';
 
 
 //MongoDB Connection
-mongoose.connect('mongodb://${mongo_addr}:27017/employees_db');
+mongoose.connect('mongodb://localhost:27017/employees_db');
 mongoose.connection.on('connected', function(){
 	console.log('connected to mongodb on port 27017');
 });

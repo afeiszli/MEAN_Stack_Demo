@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { CompanyService } from '../company.service';
 import { Company } from '../company';
 
@@ -9,19 +9,49 @@ import { Company } from '../company';
   providers: [CompanyService]
 })
 export class CompaniesComponent implements OnInit {
-//  companies: Company[];
   companies: String[];
-//  company: Company;
-  comapny: string;               
+  company: string;
+  selectedCompany: Company;               
   salary_sum: number;
-//  name: string;
 
-  constructor(private companyService: CompanyService) { }
+  @Input()
+  updateEvent(){
+    this.companyService.getCompanies();
+    this.getSalary();
+    console.log("Ran UpdateEvent")
+  }
+
+  getSalary(){
+    this.companyService.getSalaries(this.company).subscribe((res)=>{
+      this.salary_sum = res[0].salary_sum;
+    });
+    console.log(this.salary_sum);
+    this.ref.detectChanges();
+  }
+
+  updateCompanies(){
+    this.companyService.getCompanies()
+      .subscribe( data => this.companies = data);
+      console.log(this.companies);
+  }
+  
+  update(){
+    this.updateCompanies();
+    this.getSalary();
+    this.ref.detectChanges();
+  }
+
+  getSalaries(company){
+    this.companyService.getSalaries(company).subscribe((res)=>{
+      //this.selectedCompany = res;
+      this.salary_sum = res[0].salary_sum;
+    });
+  }
+  constructor(private companyService: CompanyService, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.companyService.getCompanies()
       .subscribe( data => this.companies = data);
-//      .subscribe(data => console.log('CAN YOU HEAR ME???' + data));
       console.log(this.companies);
   }
 }
