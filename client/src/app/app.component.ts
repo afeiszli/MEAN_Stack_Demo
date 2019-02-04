@@ -8,18 +8,16 @@ import { CompaniesComponent } from './companies/companies.component'
 })
 export class AppComponent {
 
-  public updateCompaniesEvent: Event;
-
+  //get CompaniesComponent instance to update when an employee is added
   @ViewChild('companyChild') companyChild: CompaniesComponent;
 
   constructor( private ref: ChangeDetectorRef ) {}  
 
+  //Update CompaniesComponent on add of employee in EmployeesComponent
   childAddedEmployee(event: Event) {
-    //this.updateCompaniesEvent = event;
     setTimeout(() => this.companyChild.updateCompanies(), 2000);
     setTimeout(() => this.companyChild.getSalary(), 2000);
     this.ref.detectChanges();
-   console.log("Ran ChildaddedEmployee Event");
   }
 
 }

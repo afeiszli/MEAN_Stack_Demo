@@ -8,19 +8,13 @@ import { Company } from '../company';
   styleUrls: ['./companies.component.scss'],
   providers: [CompanyService]
 })
+
 export class CompaniesComponent implements OnInit {
   companies: String[];
   company: string;
-  selectedCompany: Company;               
   salary_sum: number;
 
-  @Input()
-  updateEvent(){
-    this.companyService.getCompanies();
-    this.getSalary();
-    console.log("Ran UpdateEvent")
-  }
-
+  //get total salaries (set salary_sum) for the current value of company
   getSalary(){
     this.companyService.getSalaries(this.company).subscribe((res)=>{
       this.salary_sum = res[0].salary_sum;
@@ -29,24 +23,13 @@ export class CompaniesComponent implements OnInit {
     this.ref.detectChanges();
   }
 
+  //update value of companies, for use when employees are added
   updateCompanies(){
     this.companyService.getCompanies()
       .subscribe( data => this.companies = data);
       console.log(this.companies);
   }
-  
-  update(){
-    this.updateCompanies();
-    this.getSalary();
-    this.ref.detectChanges();
-  }
 
-  getSalaries(company){
-    this.companyService.getSalaries(company).subscribe((res)=>{
-      //this.selectedCompany = res;
-      this.salary_sum = res[0].salary_sum;
-    });
-  }
   constructor(private companyService: CompanyService, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {

@@ -1,6 +1,7 @@
 <div class="row">
 <div class= "col-md-12">
 <h1>Get Company Costs</h1>
+	<!-- select a company -->
 	<form #form="ngForm">
 		<h2>
 		<strong>Company: </strong>
@@ -8,10 +9,9 @@
 			<option *ngFor="let company of companies" name="company" value="{{company}}">{{company}}</option>
 		</select>
 		</h2>
-                <button type = "submit" (click)="updateCompanies()">Submit</button>
-
 	</form>
-<h3><strong>{{company}} </strong> spends ${{salary_sum}} on salaries per year</h3>
+<!-- display company if one selected -->
+<h3 *ngIf="company"><strong>{{company}} </strong> spends ${{salary_sum}} on salaries per year</h3>
 
 </div>
 </div>

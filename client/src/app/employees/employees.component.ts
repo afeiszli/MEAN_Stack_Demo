@@ -10,6 +10,7 @@ import { EmployeeService } from '../employee.service';
 })
 export class EmployeesComponent implements OnInit {
 
+  //let parent know when an employee is added
   @Output() employeeAddedEvent = new EventEmitter<Event>();
 
   employees: Employee[];
@@ -23,21 +24,17 @@ export class EmployeesComponent implements OnInit {
 
   constructor(private http: HttpClient, private employeeService: EmployeeService) { }
 
+  //add an employee to the DB and notify the parent so it can update CompaniesComponent
   addEmployee(value: any){
-    this.first_name=value.first_name;
-    this.last_name=value.last_name;
-    this.address=value.address;
-    this.company=value.company;
-    this.salary=value.salary;
 
     var newEmployee ={
-      first_name:this.first_name,
-      last_name:this.last_name,
-      address:this.address,
-      company:this.company,
-      salary:this.salary	
+      first_name:value.first_name,
+      last_name:value.last_name,
+      address:value.address,
+      company:value.company,
+      salary:value.salary	
     }
- 
+
     this.employeeService.addEmployee(newEmployee).subscribe((res)=>{
       this.employees.push(res);
       console.log(res);
