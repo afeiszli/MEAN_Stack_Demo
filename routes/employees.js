@@ -14,9 +14,8 @@ router.get('/employees', function(req, res, next){
 	});
 });
 
-//Create User
+//Create Employee
 router.post('/employee', function(req, res, next){
-	//var employee = req.body;
 	var employee = new Employee({
 		first_name: req.body.first_name,
 		last_name: req.body.last_name,
