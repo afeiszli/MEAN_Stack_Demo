@@ -7,23 +7,23 @@
 	<form #form="ngForm" (ngSubmit)="addEmployee(form.value)" >
                 <div class = "form-group">
                         <label>First Name</label><br>
-                        <input type = "text" name = "first_name" [(ngModel)]="first_name">
+                        <input type = "text" name = "first_name" [(ngModel)]="first_name" required>
                 </div>
                 <div class = "form-group">
 			<label>Last Name</label><br>
-                        <input type = "text" name = "last_name" [(ngModel)]="last_name">
+                        <input type = "text" name = "last_name" [(ngModel)]="last_name" required>
                 </div>
                 <div class = "form-group">
 			<label>address</label><br>
-                        <input type = "text" name = "address" [(ngModel)]="address">
+                        <input type = "text" name = "address" [(ngModel)]="address" required>
                 </div>
                 <div class = "form-group">
 			<label>company</label><br>
-                        <input type = "text" name = "company" [(ngModel)]="company">
+                        <input type = "text" name = "company" [(ngModel)]="company" required>
                 </div>
                 <div class = "form-group">
 			<label>salary</label><br>
-                        <input type = "number" name = "salary" [(ngModel)]="salary">
+                        <input type = "number" name = "salary" [(ngModel)]="salary" required>
                 </div>
 
 		<button type = "submit">Submit</button>
