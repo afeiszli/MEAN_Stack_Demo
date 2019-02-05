@@ -3,4 +3,4 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY . ./
 RUN npm install
-CMD ["ng", "serve"]
+CMD ["./node_modules/@angular/cli/bin/ng", "serve"]
